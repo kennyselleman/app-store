@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apps – MingoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .search-dropdown {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none; /* Izajya igaragara gusa iyo umuntu yanditse */
+    z-index: 2000;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.suggestion-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.suggestion-item img {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    margin-right: 12px;
+}
+
+.suggestion-info h5 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.suggestion-info p {
+    color: #8e8e93;
+    font-size: 12px;
+}
+      /* --- Header & Search Bar --- */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(25px); /* Frosty glass effect */
+    -webkit-backdrop-filter: blur(25px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    flex: 1;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+.search-box i {
+    color: #8e8e93;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #8e8e93;
+}
+
+/* Profile Icon */
+.profile-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(45deg, #333, #555);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .logo { font-size: 1.2rem; }
+    .search-box { max-width: 200px; }
+}
+        body { background: #000; padding-top: 20px; }
+        
+        /* Section styling */
+        .app-section { margin-bottom: 35px; padding-left: 20px; }
+        .section-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+            padding-right: 20px;
+            margin-bottom: 15px;
+            border-top: 0.5px solid #222;
+            padding-top: 15px;
+        }
+        .section-header h2 { font-size: 22px; font-weight: 700; }
+        .section-header a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        /* Horizontal Scroll Wrapper */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding-bottom: 10px;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
+        /* App Item Style (Modern List) */
+        .app-row-item {
+            min-width: 85%;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            scroll-snap-align: start;
+        }
+
+        .app-icon-large {
+            width: 65px;
+            height: 65px;
+            border-radius: 14px;
+            margin-right: 15px;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .app-info { flex: 1; border-bottom: 0.5px solid #222; padding-bottom: 10px; }
+        .app-info h4 { font-size: 17px; font-weight: 600; margin-bottom: 2px; }
+        .app-info p { color: #8e8e93; font-size: 13px; }
+
+        .btn-get-action {
+            background: #1c1c1e;
+            color: var(--accent);
+            border: none;
+            padding: 6px 22px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        /* Hero Banner for Apps Page */
+        .apps-hero-banner {
+            margin: 0 20px 30px;
+            height: 220px;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)), url('https://plus.unsplash.com/premium_photo-1685086785054-d047cdc0e525?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fHNvZnR3YXJlfGVufDB8fDB8fHww');
+            background-size: cover;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="container header-content">
+        <div class="logo-area">
+            <a href="index.html" class="logo">MingoStore</a>
+        </div>
+        <div class="search-box">
+            <i class="material-icons-outlined">search</i>
+            <input type="text" placeholder="Search apps, games..." id="globalSearch">
+            <div id="searchDropdown" class="search-dropdown"></div>
+        </div>
+        <div class="profile-area">
+            <div class="profile-icon"></div>
+        </div>
+    </div>
+</header>
+
+        <div class="apps-hero-banner">
+            <span style="color: var(--accent); font-weight: 700; font-size: 12px; letter-spacing: 1px;">NEW RELEASE</span>
+            <h2 style="font-size: 26px;">Mingo AI Assistant</h2>
+            <p style="color: #ccc; font-size: 14px;">Build apps faster with AI.</p>
+        </div>
+
+        <section class="app-section">
+            <div class="section-header">
+                <h2>Top Free Apps</h2>
+                <a href="#">See All</a>
+            </div>
+            <div class="scroll-container">
+                <div style="display: flex; flex-direction: column; min-width: 90%;">
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/mingo.png" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>Mingo Software</h4>
+                            <p>Education & Development</p>
+                        </div>
+                        <a href="https://drive.google.com/file/d/15JvHFHR9RwtPWaVnsHv8qPdoCKfIl2Hl/view?usp=sharing"><button class="btn-get-action">GET</button></a>
+                    </div>
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/pintol.png" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>PINOL AI</h4>
+                            <p>AI Coding Expert</p>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1urFOt9_tVL5lFNTwJC_u6IycbzVzWpqw/view?usp=sharing"><button class="btn-get-action">GET</button></a>
+                    </div>
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/ICON.jpg" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>Food Delivery</h4>
+                            <p>Order Tasty Meals</p>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1lDw_MDjU9Q_ejNx3W0gB7qLFLPPmq58m/view?usp=sharing"><button class="btn-get-action">GET</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="app-section">
+            <div class="section-header">
+                <h2>Entertainment</h2>
+                <a href="#">See All</a>
+            </div>
+            <div class="scroll-container">
+                <div style="display: flex; flex-direction: column; min-width: 90%;">
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/net.jpg" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>Netstream</h4>
+                            <p>Movies & Series</p>
+                        </div>
+                        <a href="no.html"><button class="btn-get-action">GET</button></a>
+                    </div>
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/umuzi.jpeg" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>UmuziArt</h4>
+                            <p>Dance & Culture</p>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1l9CXezVI-EGeQe8QlqaasQRXX-xN-Yuh/view?usp=sharing"><button class="btn-get-action">GET</button></a>
+                    </div>
+                    <div class="app-row-item">
+                        <img src="https://seleman.edgeone.dev/Dr.jpg" class="app-icon-large">
+                        <div class="app-info">
+                            <h4>Seleman</h4>
+                            <p>Founder Portfolio</p>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1FWJN0QjfPJtQM3dHAQgZOP9MUE1v5MA4/view?usp=sharing"><button class="btn-get-action">GET</button></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link"><i class="material-icons-outlined">home</i><span>home</span></a>
+        <a href="ni (3).html" class="nav-link"><i class="material-icons-outlined">language</i><span>websites</span></a>
+        <a href="in (2).html" class="nav-link active"><i class="material-icons-outlined">apps</i><span>Apps</span></a>
+        <a href="in (1).html" class="nav-link"><i class="material-icons-outlined">search</i><span>Search</span></a>
+    </nav>
+<script>
+  // 1. Urutonde rwa Apps zose ziri muri Store yawe (Database)
+const allApps = [
+    { name: "Mingo Software", category: "Education", img: "https://seleman.edgeone.dev/mingo.png" },
+    { name: "Food Delivery", category: "Restaurant", img: "https://seleman.edgeone.dev/ICON.jpg" },
+    { name: "PINOL AI", category: "Coding Assistant", img: "https://seleman.edgeone.dev/pintol.png" },
+    { name: "UmuziArt", category: "Culture", img: "https://seleman.edgeone.dev/umuzi.jpeg" },
+    { name: "Seleman Portfolio", category: "Personal", img: "https://seleman.edgeone.dev/Dr.jpg" },
+    { name: "Netstream", category: "Movies", img: "https://seleman.edgeone.dev/net.jpg" }
+];
+
+const searchInput = document.getElementById('globalSearch');
+const searchDropdown = document.getElementById('searchDropdown');
+
+searchInput.addEventListener('input', (e) => {
+    const value = e.target.value.toLowerCase();
+    searchDropdown.innerHTML = ""; // Toza ibisubizo bya mbere
+
+    if (value.length > 0) {
+        const filtered = allApps.filter(app => 
+            app.name.toLowerCase().includes(value) || 
+            app.category.toLowerCase().includes(value)
+        );
+
+        if (filtered.length > 0) {
+            searchDropdown.style.display = 'block';
+            filtered.forEach(app => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `
+                    <img src="${app.img}">
+                    <div class="suggestion-info">
+                        <h5>${app.name}</h5>
+                        <p>${app.category}</p>
+                    </div>
+                `;
+                searchDropdown.appendChild(div);
+            });
+        } else {
+            searchDropdown.style.display = 'block';
+            searchDropdown.innerHTML = `<p style="padding: 20px; text-align: center; color: #888;">No apps found.</p>`;
+        }
+    } else {
+        searchDropdown.style.display = 'none';
+    }
+});
+
+// Gufunga dropdown iyo ukanze ahandi
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target)) {
+        searchDropdown.style.display = 'none';
+    }
+});
+  </script>
+</body>
+</html>

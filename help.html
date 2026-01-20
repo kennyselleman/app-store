@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Help & Support – MingoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        .help-hero {
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,242,234,0.05), transparent);
+        }
+
+        .help-hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+        .help-hero p { color: #888; font-size: 16px; }
+
+        /* FAQ Section */
+        .faq-section { margin-top: 30px; }
+        .faq-item {
+            background: #161618;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .faq-item:hover { border-color: var(--accent); }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .faq-answer {
+            margin-top: 10px;
+            color: #8e8e93;
+            font-size: 14px;
+            display: none; /* Izajya ifunguka ukanzeho */
+        }
+
+        /* Contact Form */
+        .contact-form-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 25px;
+            margin: 40px 0;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #ccc; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: #242426;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 12px;
+            color: white;
+            font-family: inherit;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--accent);
+            color: black;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,242,234,0.2); }
+      
+      
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        margin: 30px 0;
+    }
+
+    .contact-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-item:hover {
+        background: rgba(0, 242, 234, 0.05);
+        border-color: var(--accent);
+        transform: translateY(-5px);
+    }
+
+    .contact-item i {
+        font-size: 30px;
+    }
+
+    /* Amabara yihariye kuri buri platform */
+    .whatsapp i { color: #25D366; }
+    .instagram i { color: #E1306C; }
+    .email i { color: var(--accent); }
+    .phone i { color: #3498db; }
+
+    .contact-label {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .contact-value {
+        font-size: 12px;
+        color: #888;
+    }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area"><span class="logo">MingoStore</span></div>
+            <div class="profile-area"><div class="profile-icon"></div></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="help-hero">
+            <h1>How can we help?</h1>
+            <p>Search for solutions or contact our team.</p>
+        </section>
+
+        <section class="faq-section">
+            <h3 style="margin-bottom: 15px;">Frequently Asked Questions</h3>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How do I install an app?</span>
+                    <i class="material-icons-outlined">expand_more</i>
+                </div>
+                <div class="faq-answer">Click the "GET" button on any app card. If it's a web app, it will open in a new tab.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Is MingoStore free?</span>
+                    <i class="material-icons-outlined">expand_more</i>
+                </div>
+                <div class="faq-answer">Yes, all products currently listed on MingoStore are free to use.</div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Why was an app removed?</span>
+                    <i class="material-icons-outlined">expand_more</i>
+                </div>
+                <div class="faq-answer">Apps are removed if they are outdated or replaced by better versions. See our "Product Unavailable" page for details.</div>
+            </div>
+        </section>
+
+        <section class="container">
+    <h3 style="margin-top: 40px; margin-bottom: 20px; text-align: center;">Get in Touch</h3>
+    
+    <div class="contact-grid">
+        <a href="https://wa.me/+250736223171" class="contact-item whatsapp" target="_blank">
+            <i class="material-icons-outlined">chat</i>
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">Chat with us</span>
+        </a>
+
+        <a href="https://instagram.com/developer.sele" class="contact-item instagram" target="_blank">
+            <i class="material-icons-outlined">camera_alt</i>
+            <span class="contact-label">Instagram</span>
+            <span class="contact-value">developer.sele</span>
+        </a>
+
+        <a href="mailto:kennyselleman@gmail.com" class="contact-item email">
+            <i class="material-icons-outlined">mail_outline</i>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">kennyselleman@gmail.com</span>
+        </a>
+
+        <a href="tel:+250 794 276 148" class="contact-item phone">
+            <i class="material-icons-outlined">call</i>
+            <span class="contact-label">Call Us</span>
+            <span class="contact-value">+250 794 276 148</span>
+        </a>
+    </div>
+</section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link"><i class="material-icons-outlined">home</i><span>home</span></a>
+        <a href="ni (3).html" class="nav-link"><i class="material-icons-outlined">language</i><span>Websites</span></a>
+        <a href="ni (2).html" class="nav-link"><i class="material-icons-outlined">apps</i><span>Apps</span></a>
+        <a href="in (1).html" class="nav-link"><i class="material-icons-outlined">search</i><span>Search</span></a>
+    </nav>
+
+    <script>
+        // Uburyo bwo gufungura no gufunga FAQ
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('i');
+            const isOpen = answer.style.display === 'block';
+            
+            answer.style.display = isOpen ? 'none' : 'block';
+            icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        // Action yo kohereza form
+        document.getElementById('helpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent to Mingo Support Team.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

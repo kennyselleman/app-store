@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Product Unavailable – MingoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .notice-container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .icon-box {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .icon-box i {
+            font-size: 60px;
+            color: #ff3b30; /* iOS Red */
+        }
+
+        .notice-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .notice-text {
+            font-size: 16px;
+            color: #8e8e93;
+            max-width: 300px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+        }
+
+        .help-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .help-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--accent);
+            color: black;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .help-btn:active {
+            transform: scale(0.95);
+        }
+
+        .back-link {
+            margin-top: 20px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-area"><span class="logo">MingoStore</span></div>
+            <div class="profile-area"><div class="profile-icon"></div></div>
+        </div>
+    </header>
+
+    <main class="container notice-container">
+        <div class="icon-box">
+            <i class="material-icons-outlined">info</i>
+        </div>
+
+        <h1 class="notice-title">Product Unavailable</h1>
+        <p class="notice-text">
+            This product is no longer available on Mingo Store. It might have been removed or moved to a new location.
+        </p>
+
+        <div class="help-section">
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Need assistance finding an alternative?</p>
+            <a href="help.html" class="help-btn">
+                <i class="material-icons-outlined">help_outline</i>
+                Click here for Help
+            </a>
+        </div>
+
+        <a href="index.html" class="back-link">Return to home</a>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link"><i class="material-icons-outlined">home</i><span>home</span></a>
+        <a href="ni (3).html" class="nav-link"><i class="material-icons-outlined">language</i><span>Web</span></a>
+        <a href="in (2).html" class="nav-link"><i class="material-icons-outlined">apps</i><span>Apps</span></a>
+        <a href="in (1).html" class="nav-link"><i class="material-icons-outlined">search</i><span>Search</span></a>
+    </nav>
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Search – MingoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="stylesheet" href="style.css">
+  <style>
+  /* --- Search Specific Styles --- */
+.search-header {
+    padding: 40px 0 20px;
+}
+
+.search-header h1 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    left: 15px;
+    color: var(--text-dim);
+    font-size: 20px;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    background: #1c1c1e;
+    border: none;
+    padding: 12px 12px 12px 45px;
+    border-radius: 12px;
+    color: white;
+    font-size: 17px;
+    outline: none;
+}
+
+/* Discover Chips */
+.discover-section {
+    margin-top: 30px;
+}
+
+.discover-section h3, .results-section h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.discover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 0.5px solid #333;
+    padding-bottom: 25px;
+}
+
+.tag-chip {
+    color: var(--accent);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* List Style for Search */
+.results-section {
+    margin-top: 25px;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 0.5px solid #222;
+}
+
+.search-item img {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.search-item-info {
+    flex-grow: 1;
+}
+
+.search-item-info h4 {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.search-item-info p {
+    color: var(--text-dim);
+    font-size: 14px;
+}
+
+.get-btn-small {
+    background: #1c1c1e;
+    color: var(--accent);
+    border: none;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.get-btn-small:active {
+    background: var(--accent);
+    color: black;
+}
+  </style>
+</head>
+<body>
+    <main class="container">
+        <div class="search-header">
+            <h1>Search</h1>
+            <div class="search-input-wrapper">
+                <i class="material-icons-outlined">search</i>
+                <input type="text" id="mainSearch" placeholder="Games, Apps, Stories..." autofocus>
+            </div>
+        </div>
+
+        <section class="results-section">
+            <h3 id="resultTitle">Suggested Apps</h3>
+
+            <div class="search-results-list" id="searchResults">
+                
+                <div class="search-item" data-name="mingo software academy">
+                    <img src="https://seleman.edgeone.dev/mingo.png" alt="Mingo">
+                    <div class="search-item-info">
+                        <h4>Mingo software</h4>
+                        <p>Education & Academy</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/15JvHFHR9RwtPWaVnsHv8qPdoCKfIl2Hl/view?usp=sharing"><button class="get-btn-small">GET</button></a>
+                </div>
+
+                <div class="search-item" data-name="food delivery restaurant">
+                    <img src="https://seleman.edgeone.dev/ICON.jpg" alt="Food">
+                    <div class="search-item-info">
+                        <h4>Food delivery</h4>
+                        <p>Restaurant Service</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1lDw_MDjU9Q_ejNx3W0gB7qLFLPPmq58m/view?usp=sharing"><button class="get-btn-small">GET</button></a>
+                </div>
+
+                <div class="search-item" data-name="pinol ai coding assistant">
+                    <img src="https://seleman.edgeone.dev/pintol.png" alt="Pinol">
+                    <div class="search-item-info">
+                        <h4>PINOL AI</h4>
+                        <p>Software Development</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1urFOt9_tVL5lFNTwJC_u6IycbzVzWpqw/view?usp=sharing"><button class="get-btn-small">GET</button></a>
+                </div>
+
+                <div class="search-item" data-name="umuziart culture dancing">
+                    <img src="https://seleman.edgeone.dev/umuzi.jpeg" alt="Umuzi">
+                    <div class="search-item-info">
+                        <h4>UmuziArt</h4>
+                        <p>Art & Culture</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1l9CXezVI-EGeQe8QlqaasQRXX-xN-Yuh/view?usp=sharing"><button class="get-btn-small">GET</button></a>
+                </div>
+
+                <div class="search-item" data-name="seleman">
+                    <img src="https://seleman.edgeone.dev/Dr.jpg" alt="seleman">
+                    <div class="search-item-info">
+                        <h4>seleman</h4>
+                        <p>the portfolio of the mingo compuny founder</p>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1FWJN0QjfPJtQM3dHAQgZOP9MUE1v5MA4/view?usp=sharing"><button class="get-btn-small">GET</button></a>
+                </div>
+
+                <div class="search-item" data-name="netstream movies streaming">
+                    <img src="https://seleman.edgeone.dev/net.jpg" alt="Netstream">
+                    <div class="search-item-info">
+                        <h4>Netstream</h4>
+                        <p>Movie Streaming</p>
+                    </div>
+                    <a href="no.html"><button class="get-btn-small">GET</button></a>
+                </div>
+
+            </div>
+
+            <div id="noResults" style="display: none; text-align: center; margin-top: 50px; color: #8e8e93;">
+                <p>No apps found for your search.</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link">
+            <i class="material-icons-outlined">home</i>
+            <span>home</span>
+        </a>
+        <a href="ni (3).html" class="nav-link"><i class="material-icons-outlined">languages</i><span>websites</span></a>
+        <a href="in (2).html" class="nav-link"><i class="material-icons-outlined">apps</i><span>Apps</span></a>
+        <a href="search.html" class="nav-link active"><i class="material-icons-outlined">search</i><span>Search</span></a>
+    </nav>
+
+    <script>
+        const searchInput = document.getElementById('mainSearch');
+        const appItems = document.querySelectorAll('.search-item');
+        const noResults = document.getElementById('noResults');
+        const resultTitle = document.getElementById('resultTitle');
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase().trim();
+            let foundCount = 0;
+
+            appItems.forEach(item => {
+                // Dusoma izina riri muri "data-name" kugira ngo search ibe yagutse
+                const appData = item.getAttribute('data-name').toLowerCase();
+                
+                if (appData.includes(query)) {
+                    item.style.display = 'flex';
+                    foundCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Guhindura umutwe w'inyandiko (Title)
+            if (query === "") {
+                resultTitle.innerText = "Suggested Apps";
+                noResults.style.display = 'none';
+            } else {
+                resultTitle.innerText = `Results for "${query}"`;
+                // Kwerekana ubutumwa niba nta kintu kibonetse
+                noResults.style.display = foundCount === 0 ? 'block' : 'none';
+            }
+        });
+    </script>
+</body>
+</html>

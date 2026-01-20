@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Web Apps – MingoStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        /* Modern Search Bar */
+.search-container {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+    margin: 0 15px;
+}
+
+.search-bar-modern {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-bar-modern:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(0, 242, 234, 0.1);
+}
+
+.search-bar-modern input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
+    margin-left: 10px;
+}
+
+/* Search Results Overlay */
+.search-overlay {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    display: none;
+    max-height: 450px;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.search-results-wrapper { padding: 15px; }
+
+.search-meta {
+    padding: 0 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Result Item */
+.result-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+    margin-bottom: 5px;
+}
+
+.result-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.result-card img {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.result-info { flex: 1; }
+.result-info h5 { font-size: 16px; margin-bottom: 2px; }
+.result-info span { 
+    font-size: 11px; 
+    padding: 2px 8px; 
+    background: rgba(0, 242, 234, 0.15); 
+    color: var(--accent);
+    border-radius: 4px;
+    font-weight: 700;
+}
+        /* --- Web Apps Specific Design --- */
+        .web-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .web-card {
+            background: #121212;
+            border-radius: 24px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .web-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.15);
+        }
+
+        .web-icon-wrapper {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            background: #1a1a1a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 0.5px solid rgba(255,255,255,0.1);
+        }
+
+        .web-icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .web-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .web-url {
+            font-size: 11px;
+            color: var(--accent);
+            opacity: 0.8;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+
+        .visit-btn {
+            background: rgba(0, 242, 234, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .web-card:hover .visit-btn {
+            background: var(--accent);
+            color: black;
+        }
+
+        .category-header {
+            margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 0.5px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="container header-content">
+        <div class="logo-area">
+            <span class="logo">MingoStore</span>
+        </div>
+        <div class="search-container">
+            <div class="search-bar-modern">
+                <i class="material-icons-outlined">search</i>
+                <input type="text" id="globalSearch" placeholder="Search apps and websites...">
+            </div>
+            <div id="searchOverlay" class="search-overlay">
+                <div class="search-results-wrapper">
+                    <div class="search-meta">
+                        <span id="resultsCount">Suggested for you</span>
+                    </div>
+                    <div id="searchResultsList"></div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-area">
+            <div class="profile-icon"></div>
+        </div>
+    </div>
+</header>
+
+    <main class="container">
+        <div class="category-header">
+            <h1 style="font-size: 32px; font-weight: 800;">Web Apps</h1>
+            <p style="color: #888;">Visit official websites and web applications.</p>
+        </div>
+
+        <div class="web-grid">
+            <a href="https://mingo.edgeone.dev" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/mingo.png" alt="Mingo">
+                </div>
+                <h4 class="web-title">Mingo Academy</h4>
+                <p class="web-url">mingosoftware.com</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+
+            <a href="https://kennyselleman.github.io/food-delivery/" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/ICON.jpg" alt="Food">
+                </div>
+                <h4 class="web-title">Food delivery</h4>
+                <p class="web-url">food delivery.rw</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+
+            <a href="https://seleman.edgeone.dev" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/Dr.jpg" alt="Seleman">
+                </div>
+                <h4 class="web-title">Seleman.Dev</h4>
+                <p class="web-url">seleman.dev</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+
+            <a href="no.html" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/pintol.png" alt="Seleman">
+                </div>
+                <h4 class="web-title">pintol ai</h4>
+                <p class="web-url">pintol.com</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+
+               <a href="https://umuzi.edgeone.dev" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/umuzi.jpeg" alt="Seleman">
+                </div>
+                <h4 class="web-title">UmuziArt</h4>
+                <p class="web-url">umuzi.com</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+
+            <a href="no.html" target="_blank" class="web-card">
+                <div class="web-icon-wrapper">
+                    <img src="https://seleman.edgeone.dev/net.jpg" alt="Netstream">
+                </div>
+                <h4 class="web-title">Netstream Web</h4>
+                <p class="web-url">netstream.rw</p>
+                <button class="visit-btn">VISIT SITE</button>
+            </a>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-link"><i class="material-icons-outlined">home</i><span>home</span></a>
+        <a href="ni (3).html" class="nav-link active"><i class="material-icons-outlined">language</i><span>Websites</span></a>
+        <a href="in (2).html" class="nav-link"><i class="material-icons-outlined">apps</i><span>Apps</span></a>
+        <a href="in (1).html" class="nav-link"><i class="material-icons-outlined">search</i><span>Search</span></a>
+    </nav>
+<script>
+    const allResources = [
+    // Native Apps
+    { name: "Mingo Software", type: "App", img: "https://seleman.edgeone.dev/mingo.png", url: "https://drive.google.com/file/d/15JvHFHR9RwtPWaVnsHv8qPdoCKfIl2Hl/view?usp=sharing" },
+    { name: "Food Delivery", type: "App", img: "https://seleman.edgeone.dev/ICON.jpg", url: "https://drive.google.com/file/d/1lDw_MDjU9Q_ejNx3W0gB7qLFLPPmq58m/view?usp=sharing" },
+    { name: "PINOL AI", type: "App", img: "https://seleman.edgeone.dev/pintol.png", url: "https://drive.google.com/file/d/1urFOt9_tVL5lFNTwJC_u6IycbzVzWpqw/view?usp=sharing" },
+    { name: "Netstream", type: "App", img: "https://seleman.edgeone.dev/net.jpg", url: "no.html" },
+    { name: "Seleman", type: "App", img: "https://seleman.edgeone.dev/Dr.jpg", url: "https://drive.google.com/file/d/1FWJN0QjfPJtQM3dHAQgZOP9MUE1v5MA4/view?usp=sharing" },
+    { name: "Umuzi", type: "App", img: "https://seleman.edgeone.dev/umuzi.jpeg", url: "https://drive.google.com/file/d/1l9CXezVI-EGeQe8QlqaasQRXX-xN-Yuh/view?usp=sharing" },
+    
+    // Websites (Web Apps)
+    { name: "Mingo Academy Web", type: "Website", img: "https://seleman.edgeone.dev/mingo.png", url: "https://mingo.edgeone.dev" },
+    { name: "Seleman Dev Web", type: "Website", img: "https://seleman.edgeone.dev/Dr.jpg", url: "https://seleman.edgeone.dev" },
+    { name: "UmuziArt Web", type: "Website", img: "https://seleman.edgeone.dev/umuzi.jpeg", url: "https://umuzi.edgeone.dev" },
+    { name: "PINTO AI", type: "Website", img: "https://seleman.edgeone.dev/pintol.png", url: "no.html" },
+    { name: "Netstream", type: "Website", img: "https://seleman.edgeone.dev/net.jpg", url: "no.html" },
+    { name: "food delivery", type: "Website", img: "https://seleman.edgeone.dev/ICON.jpg", url: "no.html" },
+];
+
+const mainSearch = document.getElementById('globalSearch');
+const overlay = document.getElementById('searchOverlay');
+const list = document.getElementById('searchResultsList');
+const countText = document.getElementById('resultsCount');
+
+mainSearch.addEventListener('input', (e) => {
+    const val = e.target.value.toLowerCase().trim();
+    list.innerHTML = "";
+    
+    if (val.length > 0) {
+        const matches = allResources.filter(item => 
+            item.name.toLowerCase().includes(val) || 
+            item.type.toLowerCase().includes(val)
+        );
+
+        if (matches.length > 0) {
+            overlay.style.display = 'block';
+            countText.innerText = `${matches.length} Results Found`;
+            matches.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.url;
+                card.className = 'result-card';
+                card.innerHTML = `
+                    <img src="${item.img}">
+                    <div class="result-info">
+                        <h5>${item.name}</h5>
+                        <span>${item.type}</span>
+                    </div>
+                    <i class="material-icons-outlined" style="color:#444">chevron_right</i>
+                `;
+                list.appendChild(card);
+            });
+        } else {
+            overlay.style.display = 'block';
+            countText.innerText = "No Results";
+            list.innerHTML = `<p style="padding:20px; color:#666; text-align:center;">No apps or websites match your search.</p>`;
+        }
+    } else {
+        overlay.style.display = 'none';
+    }
+});
+
+// Gufunga iyo ukanze hanze
+document.addEventListener('click', (e) => {
+    if (!mainSearch.contains(e.target) && !overlay.contains(e.target)) {
+        overlay.style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>
